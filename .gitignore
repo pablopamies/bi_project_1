@@ -1,0 +1,23 @@
+# Entorno virtual
+project_env/
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Variables de entorno
+.env
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# VS Code
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

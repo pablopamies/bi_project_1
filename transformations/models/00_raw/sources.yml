@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    database: BI_PROJECT
+    schema: RAW
+
+    tables:
+      - name: sales_raw
+        description: "Datos originales cargados desde el CSV sin transformaciones."

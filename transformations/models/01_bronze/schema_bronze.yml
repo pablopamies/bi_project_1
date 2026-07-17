@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: br_sales
+    description: "Capa bronze, datos cargados del esquema RAW"
+
+    columns:
+
+        - name: transaction_id
+          description: "ID único de la transacción"
+          tests:
+            - unique
+            - not_null
+        
+        - name: date
+          description: "Día en que se realizó la transacción"
+
+        - name: customer_id
+          description: "ID único del cliente"
+          tests:
+            - not_null
+
+        - name: gender
+          description: "Sexo del cliente"
+          tests:
+            - accepted_values:
+                arguments:
+                  values:
+                    - "Male"
+                    - "Female"
+        
+        - name: age
+          description: "Edad del cliente al realizar la transacción"
+
+        - name: product_category
+          description: "Categoría del producto comprado"
+
+        - name: quantity
+          description: "Número de unidades compradas de un producto en concreto"
+
+        - name: price_per_unit
+          description: "Precio unitario del producto"
+
+        - name: total_amount
+          description: "Coste total de la transacción"
+
+        - name: day
+          description: "Día de la semana en que se realizó la transacción"
+
+        - name: day_sort
+          description: "Orden del día a lo largo de la seman (Lunes - 1, Martes - 2, etc.)"
+
+        - name: month
+          description: "Mes del año en que se realizó la transacción"
+
+        - name: month_sort
+          description: "Orden del mes a lo largo del mes (Enero - 1, Febrero - 2, etc.)"
+
+        - name: age_group
+          description: "Grupo de edad al que pertenece el cliente"
+
+        - name: quantity_category
+          description: "Categoría que se asigna a la transacción en función de cuántas unidades de un producto se han comprado"
+
+        - name: weekday_flag
+          description: "Booleano que indica si la compra se realizó entre semana o no"
+
+        - name: ingestion_timestamp
+          description: "Fecha y hora de la ingesta de los datos"
+
+

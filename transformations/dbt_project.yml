@@ -1,0 +1,30 @@
+name: 'transformations'
+version: '1.0.0'
+
+profile: 'transformations'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  transformations:
+  
+    01_bronze:
+      +schema: BRONZE
+      +materialized: incremental
+
+    02_silver:
+      +schema: SILVER
+      +materialized: view
+
+    03_gold:
+      +schema: GOLD
+      +materialized: table
