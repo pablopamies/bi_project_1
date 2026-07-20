@@ -1,0 +1,178 @@
+version: 2
+
+models:
+
+  - name: dim_customer
+    description: "Dimensión de clientes con histórico SCD Tipo 2."
+
+    columns:
+
+      - name: customer_sk
+        description: "Surrogate Key del cliente."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_bk
+        description: "Business Key procedente del sistema origen."
+        tests:
+          - not_null
+
+      - name: gender
+        description: "Género del cliente."
+
+      - name: age
+        description: "Edad del cliente."
+
+      - name: age_group
+        description: "Grupo de edad del cliente."
+
+      - name: valid_from
+        description: "Fecha de inicio de vigencia del registro."
+        tests:
+          - not_null
+
+      - name: valid_to
+        description: "Fecha de fin de vigencia del registro."
+
+      - name: is_current
+        description: "Indica si es la versión vigente del cliente."
+
+
+  - name: dim_product
+    description: "Dimensión de categorías de producto."
+
+    columns:
+
+      - name: product_sk
+        description: "Surrogate Key de la categoría."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_category
+        description: "Categoría del producto."
+        tests:
+          - unique
+          - not_null
+
+
+  - name: dim_date
+    description: "Dimensión calendario."
+
+    columns:
+
+      - name: date_sk
+        description: "Clave de fecha en formato YYYYMMDD."
+        tests:
+          - unique
+          - not_null
+
+      - name: transaction_date
+        description: "Fecha."
+        tests:
+          - unique
+          - not_null
+
+      - name: day_of_month
+
+      - name: day_name
+
+      - name: day_sort
+
+      - name: month_number
+
+      - name: month_name
+
+      - name: month_sort
+
+      - name: quarter_number
+
+      - name: year_number
+
+      - name: week_of_year
+
+      - name: weekday_flag
+
+      - name: is_weekend
+
+
+  - name: fact_sales
+    description: "Tabla de hechos con el detalle de las transacciones de venta."
+
+    columns:
+
+      - name: transaction_sk
+        description: "Surrogate Key de la transacción."
+        tests:
+          - unique
+          - not_null
+
+      - name: transaction_id
+        description: "Identificador de la transacción."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_sk
+        description: "Clave de la dimensión cliente."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: product_sk
+        description: "Clave de la dimensión producto."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_sk
+
+      - name: date_sk
+        description: "Clave de la dimensión fecha."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_sk
+
+      - name: quantity
+        description: "Cantidad vendida."
+        tests:
+          - not_null
+          #- dbt_utils.expression_is_true:
+              #arguments:
+                #expression: "> 0"
+
+      - name: price_per_unit
+        description: "Precio unitario."
+        tests:
+          - not_null
+          #- dbt_utils.expression_is_true:
+              #arguments:
+                #expression: "> 0"
+
+
+      - name: total_amount
+        description: "Importe total de la venta."
+        tests:
+          - not_null
+          #- dbt_utils.expression_is_true:
+              #arguments:
+                #expression: "> 0"
+
+      - name: calculated_amount
+        description: "Cantidad × precio unitario."
+        tests:
+          - not_null
+          #- dbt_utils.expression_is_true:
+              #arguments:
+                #expression: "> 0"
+
+      - name: amount_matches
+        description: "Indica si el importe calculado coincide con el importe registrado."
+
+      - name: ingestion_timestamp
+        description: "Timestamp técnico utilizado para la carga incremental."

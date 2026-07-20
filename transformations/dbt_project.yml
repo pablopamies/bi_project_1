@@ -16,7 +16,7 @@ clean-targets:
 
 models:
   transformations:
-  
+
     01_bronze:
       +schema: BRONZE
       +materialized: incremental
@@ -28,3 +28,7 @@ models:
     03_gold:
       +schema: GOLD
       +materialized: table
+    
+snapshots:
+  transformations:
+    +target_schema: SNAPSHOTS
