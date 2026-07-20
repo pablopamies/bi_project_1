@@ -10,6 +10,7 @@ select
     transaction_id,
     to_date(date, 'YYYY/MM/DD') as transaction_date,
     customer_id,
+    md5(concat_ws('|', gender, age, age_group)) as customer_hash,
     upper(trim(gender)) as gender,
     case
         when age between 18 and 100 then age
