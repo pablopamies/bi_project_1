@@ -98,7 +98,7 @@ models:
 
 
   - name: fact_sales
-    description: "Tabla de hechos de ventas."
+    description: "Tabla de hechos con el detalle de las transacciones de venta."
 
     columns:
 

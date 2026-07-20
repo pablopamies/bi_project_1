@@ -8,3 +8,5 @@ sources:
     tables:
       - name: sales_raw
         description: "Datos originales cargados desde el CSV sin transformaciones."
+
+      
