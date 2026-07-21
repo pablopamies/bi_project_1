@@ -21,3 +21,29 @@ logs/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+project_env/
+.venv/
+
+# dbt
+transformations/target/
+transformations/logs/
+dbt_packages/
+
+# Dagster
+.tmp_dagster_home*
+dagster_home/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
